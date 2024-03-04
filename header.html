@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Header</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <style>
+      .header-wrapper {
+        width: 100%;
+        height: 220px;
+        background-color: white;
+        overflow: visible;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @media screen and (max-width: 768px) {
+          height: 211px;
+        }
+
+        @media screen and (max-width: 640px) {
+          height: 152px;
+        }
+      }
+
+      .header-container {
+        /* border: 1px solid red; */
+        width: 1280px !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        @media screen and (max-width: 1200px) {
+          width: 100% !important;
+        }
+      }
+
+      .header-container a {
+        color: #6f7a8b !important;
+      }
+
+      .header-top {
+        height: 113px;
+        width: 1160px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1.5px solid #6f7a8b;
+        padding-bottom: 8px;
+        @media screen and (max-width: 1200px) {
+          width: 90%;
+          border-bottom: 1, 5px solid #6f7a8b;
+        }
+      }
+
+      .header-top__logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        margin-right: 30px;
+
+        @media screen and (max-width: 1200px) {
+          padding-left: 0px;
+        }
+      }
+
+      .logo-letter {
+        width: 85px;
+        height: 101px;
+        object-fit: contain;
+        @media screen and (max-width: 1200px) {
+          width: 45px;
+          height: 59px;
+        }
+      }
+
+      .logo-slogan {
+        width: 380px;
+        height: 77px;
+        object-fit: contain;
+        @media screen and (max-width: 1200px) {
+          width: 200px;
+          height: 47px;
+        }
+      }
+
+      .header-top__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+        font-family: "Raleway", sans-serif;
+        width: 253px;
+        height: 70px;
+        padding-left: 20px;
+        @media screen and (max-width: 1200px) {
+          width: 200px;
+        }
+
+        @media screen and (max-width: 640px) {
+          display: none;
+        }
+      }
+
+      .header-top__contact {
+        padding-right: 20px;
+        @media screen and (max-width: 1200px) {
+          display: flex;
+          justify-content: end;
+        }
+      }
+
+      .header-top__phone {
+        font-weight: 800;
+        text-decoration: none;
+        font-size: 28px;
+        line-height: 33px;
+        letter-spacing: 0em;
+
+        @media screen and (max-width: 1200px) {
+          font-size: 18px;
+        }
+      }
+
+      .header-top__request-call {
+        font-weight: 400;
+        text-decoration: none;
+        font-size: 24px;
+        line-height: 28px;
+        letter-spacing: 0.05em;
+
+        @media screen and (max-width: 1200px) {
+          font-size: 18px;
+        }
+      }
+
+      .header-top__search {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        padding: 0px 20px 0px 0px;
+
+        @media screen and (max-width: 1200px) {
+          width: 45%;
+          padding: 40px 0px 0px 0px;
+        }
+
+        @media screen and (max-width: 640px) {
+          display: none;
+        }
+      }
+
+      .header-top__search input {
+        width: 200px;
+        height: 32px;
+        border: 1px solid #6f7a8b;
+        border-radius: 10px;
+        padding-left: 10px;
+        font-family: "Raleway", sans-serif;
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 12px;
+        color: #6f7a8b;
+        outline: none;
+
+        @media screen and (max-width: 1200px) {
+          width: 100%;
+        }
+      }
+
+      .search-icon,
+      .search-icon-close {
+        position: absolute;
+        top: 51%;
+        right: 30px;
+        transform: translateY(-50%);
+        cursor: pointer;
+      }
+
+      .header-top__search input::placeholder {
+        font-family: "Raleway", sans-serif;
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 12px;
+        padding: 10px 428px 10px 0px;
+        color: #6f7a8b;
+      }
+
+      .search-result {
+        position: absolute;
+        display: none;
+        flex-direction: column;
+        background-color: #fff;
+        top: 210px;
+        transform: translate(0%, calc(0% - 132px));
+        right: 1;
+        width: 100%;
+        max-width: 501px;
+        border: 1px solid transparent;
+        border-radius: 10px 10px 10px 10px;
+        box-shadow: 0px 2px 2px 0px rgba(255, 255, 255, 0.547);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        cursor: pointer;
+        z-index: 9999;
+
+        @media screen and (max-width: 1200px) {
+          right: 1px;
+          width: 99%;
+        }
+      }
+
+      .search-result.active {
+        display: flex;
+        opacity: 1;
+      }
+
+      .search-result > div {
+        width: 95%;
+        font-family: "Raleway", sans-serif;
+        font-size: 16px;
+        font-weight: 300;
+        line-height: normal;
+        margin: 15px 428px 10px 8px;
+        color: #6f7a8b;
+        text-wrap: nowrap;
+        overflow: hidden;
+      }
+
+      .header-bottom {
+        height: 107px;
+        width: 1160px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @media screen and (max-width: 1200px) {
+          width: 90%;
+        }
+
+        @media screen and (max-width: 640px) {
+          display: none;
+        }
+      }
+
+      .header-menu__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-grow: 1;
+        padding: 0px 54px 0px 20px;
+        @media screen and (max-width: 1200px) {
+          padding: 0px;
+        }
+      }
+
+      .header-menu__item {
+        font-family: "Raleway";
+        font-size: 20px;
+        line-height: 23px;
+        color: #6f7a8b;
+
+        @media screen and (max-width: 1200px) {
+          font-size: 14px;
+        }
+      }
+
+      .header-menu__item a {
+        font-weight: 1000 !important;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .header-menu__item a:hover {
+        color: #6f7a8b;
+        transition: color, 0.3s ease;
+      }
+
+      .mobile-contact {
+        display: none;
+
+        @media screen and (max-width: 640px) {
+          display: flex;
+          width: 100%;
+          justify-content: space-around;
+          align-items: center;
+          padding: 9px 15px 9px 5px;
+        }
+      }
+
+      .mobile-contact .header-menu__item {
+        display: none;
+
+        @media screen and (max-width: 640px) {
+          display: block;
+          border: 3px solid #ffffff;
+          border-radius: 10px;
+          padding: 9px;
+        }
+      }
+
+      .mobile-contact svg {
+        display: none;
+
+        @media screen and (max-width: 640px) {
+          display: block;
+          padding: 9px 0px 9px 10px;
+          cursor: pointer;
+        }
+      }
+
+      .mobile-menu__wrapper {
+        /* border: 1px solid red; */
+        width: 100%;
+        display: flex;
+        align-items: start;
+        justify-content: end;
+        display: none;
+      }
+
+      .mobile-menu__bg {
+        width: 196px;
+        height: 342px;
+        background-color: black;
+        border-radius: 20px;
+        margin: -68px 5% 0px 0px;
+        z-index: 9999;
+        position: fixed;
+        overflow: hidden;
+        @media screen and (min-width: 641px) {
+          display: none;
+        }
+      }
+
+      .mobile-menu__item {
+        font-family: "Raleway", sans-serif;
+        font-weight: 900;
+        font-size: 20px;
+        text-align: left;
+        text-transform: uppercase;
+        border-bottom: 1px solid #fff;
+        padding: 22px 0px 22px 15px;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+
+    <div class="header-wrapper">
+      <div class="header-container">
+        <div class="header-top">
+          <div class="header-top__info">
+            <a class="header-top__phone" href="tel:+79067078170"
+              >+7 (906) 707-81-70</a
+            >
+            <a class="header-top__request-call" href="#popup:myform"
+              >Задать вопрос</a
+            >
+          </div>
+          <div class="header-top__logo">
+            <a href="https://presentbrand.ru">
+              <img
+                class="logo-letter"
+                src="https://static.tildacdn.com/stor6436-6432-4364-a236-343630363461/34309237.png"
+                alt=""
+              />
+              <img
+                class="logo-slogan"
+                src="https://static.tildacdn.com/stor3564-3163-4333-a235-646132326165/80686348.png"
+                alt=""
+              />
+            </a>
+          </div>
+          <div class="header-top__contact">
+            <a href="mailto:deba.vladimir@uchitel-izd.org">
+              <img
+                class="contact__mail"
+                src="https://static.tildacdn.com/stor6235-3131-4437-b439-663262666261/31464352.png"
+                alt="Contact Email"
+              />
+            </a>
+          </div>
+
+          <div class="mobile-contact">
+            <div class="header-menu__item">
+              <a href="#rec706606296"> Контакты </a>
+            </div>
+            <svg
+              search-mobile-btn
+              width="30"
+              height="32"
+              viewBox="0 0 30 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="30" height="32" rx="5" fill="white" />
+              <circle
+                cx="15"
+                cy="15"
+                r="6.25"
+                stroke="#202328"
+                stroke-width="1.5"
+              />
+              <path
+                d="M22.4487 24.001C22.7283 24.3067 23.1816 24.3067 23.4612 24.001C23.7408 23.6954 23.7408 23.1999 23.4612 22.8943L22.4487 24.001ZM19.1555 20.401L22.4487 24.001L23.4612 22.8943L20.168 19.2943L19.1555 20.401Z"
+                fill="#202328"
+              />
+            </svg>
+            <svg
+              class="show-menu"
+              width="52"
+              height="26"
+              viewBox="0 0 52 26"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2 2H50.2203"
+                stroke="#6f7a8b"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+              <path
+                d="M2 13H50.2203"
+                stroke="#6f7a8b"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+              <path
+                d="M2 24H39.9917"
+                stroke="#6f7a8b"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+            </svg>
+            <svg
+              data-mobile-menu-close
+              class="hide-menu"
+              style="display: none"
+              width="52"
+              height="36"
+              viewBox="0 0 36 36"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2 34L33.0492 2.16136"
+                stroke="#6f7a8b"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+              <path
+                d="M34.0001 33.8398L2.95085 2.0012"
+                stroke="#6f7a8b"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="header-bottom">
+          <div class="header-menu__container">
+            <div class="header-menu__item">
+              <a href="http://presentbrand.ru/#rec657808594"> Каталог </a>
+            </div>
+            <div class="header-menu__item">
+              <a href="#rec698997314"> Наши клиенты </a>
+            </div>
+            <div class="header-menu__item">
+              <a href="#rec657804670"> Портфолио </a>
+            </div>
+            <div class="header-menu__item">
+              <a href="#rec698839814"> Отзывы </a>
+            </div>
+            <div class="header-menu__item">
+              <a href="#rec706606296"> Контакты </a>
+            </div>
+            <div class="header-menu__item">
+              <a href="https://presentbrand.ru/about"> О нас </a>
+            </div>
+          </div>
+
+          <div class="header-top__search">
+            <input type="text" placeholder="Найти" id="searchInput" />
+            <svg
+              class="search-icon"
+              width="16"
+              height="17"
+              viewBox="0 0 16 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="7"
+                cy="7"
+                r="6.25"
+                stroke="#202328"
+                stroke-width="1.5"
+              />
+              <path
+                d="M14.4487 16.0001C14.7283 16.3057 15.1816 16.3057 15.4612 16.0001C15.7408 15.6944 15.7408 15.1989 15.4612 14.8933L14.4487 16.0001ZM11.1555 12.4001L14.4487 16.0001L15.4612 14.8933L12.168 11.2933L11.1555 12.4001Z"
+                fill="#202328"
+              />
+            </svg>
+            <svg
+              class="search-icon-close hidden"
+              width="16"
+              height="17"
+              viewBox="0 0 36 36"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2 34L33.0492 2.16136"
+                stroke="#072C52"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+              <path
+                d="M34.0001 33.8398L2.95085 2.0012"
+                stroke="#072C52"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+            </svg>
+
+            <div class="search-result"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mobile-menu__wrapper">
+      <div class="mobile-menu__bg">
+        <div class="mobile-menu__item">
+          <a href="#rec657808594" style="text-decoration: none; color: #fff">
+            Каталог
+          </a>
+        </div>
+        <div class="mobile-menu__item">
+          <a href="#rec698997314" style="text-decoration: none; color: #fff">
+            Бренды
+          </a>
+        </div>
+        <div class="mobile-menu__item">
+          <a href="#rec657804670" style="text-decoration: none; color: #fff">
+            Портфолио
+          </a>
+        </div>
+        <div class="mobile-menu__item">
+          <a href="#rec698839814" style="text-decoration: none; color: #fff">
+            Отзывы
+          </a>
+        </div>
+        <div class="mobile-menu__item">
+          <a
+            href="https://presentbrand.ru/about"
+            style="text-decoration: none; color: #fff"
+          >
+            О нас
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const scrollToSearch = async (menuItem) => {
+        const elements = Array.from(
+          document.querySelectorAll(".catalog-menu__container *")
+        ).filter((element) =>
+          element.textContent.includes(
+            menuItem.charAt(0).toUpperCase() + menuItem.slice(1)
+          )
+        );
+
+        for (let i = 0; i < elements.length; i++) {
+          await scrollToElement(elements[i]);
+          await clickElement(elements[i]);
+        }
+      };
+
+      const scrollToElement = (element) => {
+        return new Promise((resolve) => {
+          element.scrollIntoView({ behavior: "smooth" });
+          setTimeout(resolve, 500); // Установите желаемую задержку перед выполнением следующего действия (в миллисекундах)
+        });
+      };
+
+      const clickElement = (element) => {
+        return new Promise((resolve) => {
+          element.click();
+          setTimeout(resolve, 500); // Установите желаемую задержку перед выполнением следующего действия (в миллисекундах)
+        });
+      };
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchMenuItems = {};
+        document
+          .querySelectorAll(".catalog-menu__container[data-searchable]")
+          .forEach((container) => {
+            container.querySelectorAll("div").forEach((item) => {
+              const trimmedText = item.textContent.trim();
+              if (trimmedText.length > 0) {
+                searchMenuItems[trimmedText] = true;
+              }
+            });
+          });
+
+        let searchWord = "";
+
+        function searchWordInMenuItems() {
+          const searchWord = document
+            .querySelector("#searchInput")
+            .value.toLowerCase();
+          const searchResult = document.querySelector(".search-result");
+          searchResult.innerHTML = "";
+
+          Object.keys(searchMenuItems)
+            .filter(
+              (block) =>
+                block.toLowerCase().includes(searchWord) &&
+                searchWord.length > 0
+            )
+            .forEach((item) => {
+              const newDiv = document.createElement("div");
+              newDiv.textContent = item.toLowerCase();
+              searchResult.classList.add("active");
+              searchResult.appendChild(newDiv);
+              newDiv.addEventListener("click", () => {
+                scrollToSearch(newDiv.innerText);
+              });
+            });
+        }
+
+        $(".mobile-menu").hide();
+        $(".mobile-menu__wrapper").hide();
+        $(".hide-menu").hide();
+
+        $("#searchInput").on("input", () => {
+          searchWordInMenuItems();
+        });
+
+        $(".show-menu").on("click", () => {
+          $(".show-menu").hide();
+          $(".hide-menu").show().css("opacity", "1");
+          $(".mobile-menu").show().css("opacity", "1");
+          $(".mobile-menu__wrapper").css("display", "flex").css("opacity", "1");
+        });
+
+        $(".hide-menu, .mobile-menu__item").on("click", () => {
+          $(".show-menu").show();
+          $(".hide-menu").hide().css("opacity", "0");
+          $(".mobile-menu").hide().css("opacity", "0");
+          $(".mobile-menu__wrapper").hide().css("opacity", "0");
+        });
+
+        $("#searchInput").on("focus", () => {
+          $(".search-icon").hide();
+          $(".search-icon-close").removeClass("hidden");
+          $(".search-icon-close").on("click", () => {
+            $("#searchInput").val("");
+            $(".search-icon-close").addClass("hidden");
+            $(".search-icon").show();
+            $(".search-result").removeClass("active");
+
+            if (window.innerWidth < 640) {
+              $(".header-top__search").hide();
+              $(".mobile-contact").show();
+            }
+          });
+        });
+
+        $(".search-result").on("click", () => {
+          $(".search-result").removeClass("active");
+        });
+
+        $(window).on("resize", () => {
+          if (window.innerWidth > 640) {
+            $(".header-top__search").css({ display: "flex", width: "" });
+            $(".mobile-contact").css({ display: "flex", width: "" });
+          } else {
+            if (!$(".search-icon-close").hasClass("hidden")) {
+              $(".header-top__search").css({ display: "flex", width: "" });
+              $(".mobile-contact").hide();
+            } else {
+              $(".header-top__search").hide();
+              $(".mobile-contact").show();
+            }
+          }
+        });
+
+        $("[search-mobile-btn]").on("click", function () {
+          $(".mobile-contact").hide();
+          $(".header-top__search").css({
+            display: "flex",
+            width: "100%",
+          });
+          $("#searchInput").focus();
+        });
+      });
+    </script>
+  </body>
+</html>

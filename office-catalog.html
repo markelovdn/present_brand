@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oficce Catalog</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  </head>
+  <body>
+    <style>
+      .catalog-menu__wrapper {
+        width: 95%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 20px 20px 2.5%;
+
+        @media screen and (max-width: 1200px) {
+          width: 95%;
+          padding: 20px 20px 20px 2.5%;
+        }
+      }
+
+      .catalog-menu__container {
+        width: 1120px;
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        flex-wrap: wrap;
+
+        @media screen and (max-width: 1200px) {
+          width: 95vw;
+        }
+      }
+
+      .catalog-menu__item {
+        color: #6f7a8b;
+        font-family: "Raleway", Arial, sans-serif;
+        font-weight: 900;
+        font-size: 20px;
+        text-align: left;
+        text-transform: uppercase;
+        border-bottom: 1px solid #fff;
+        padding: 0px 40px 30px 0px;
+        cursor: pointer;
+
+        @media screen and (max-width: 1200px) {
+          padding: 0px 30px 20px 0px;
+        }
+
+        @media screen and (max-width: 960px) {
+          padding: 0px 25px 20px 0px;
+        }
+
+        @media screen and (max-width: 640px) {
+          padding: 0px 20px 20px 0px;
+        }
+
+        @media screen and (max-width: 480px) {
+          padding: 0px 15px 20px 0px;
+        }
+      }
+    </style>
+
+    <div class="catalog-menu__wrapper" data="office">
+      <div class="catalog-menu__container" data-searchable>
+        <div class="catalog-menu__item">
+          <div class="pencils-item">Карандаши</div>
+        </div>
+        <div class="catalog-menu__item">
+          <div class="calendars-item">Календари</div>
+        </div>
+        <div class="catalog-menu__item">
+          <div class="pen-item">Ручки</div>
+        </div>
+        <div class="catalog-menu__item">
+          <div class="rulers-item">Линейки</div>
+        </div>
+        <div class="catalog-menu__item">
+          <div class="notepads-item">Блокноты</div>
+        </div>
+        <div class="catalog-menu__item">
+          <div class="folders-item">Папки</div>
+        </div>
+        <div class="catalog-menu__item">
+          <div class="cartholders-item">Картхолдеры</div>
+        </div>
+        <div class="catalog-menu__item">
+          <div class="albums-item">Альбомы</div>
+        </div>
+        <div class="catalog-menu__item">
+          <div class="diaries-item">Ежедневники</div>
+        </div>
+        <div class="catalog-menu__item">
+          <div class="pencilcase-item">Пеналы</div>
+        </div>
+        <div class="catalog-menu__item">
+          <div class="notebooks-item">Тетради</div>
+        </div>
+        <div class="catalog-menu__item">
+          <div class="covers-item">Обложки</div>
+        </div>
+        <div class="catalog-menu__item">
+          <div class="schooldiaries-item">Дневники</div>
+        </div>
+        <div class="catalog-menu__item">
+          <div class="planing-item">Планинг</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="swiper catalog-swiper" data-slider="office">
+      <div class="catalog-label"></div>
+      <div class="catalog-description"></div>
+
+      <div class="swiper-wrapper catalog-wrapper"></div>
+
+      <div class="swiper-button-next catalog-button-next">
+        <svg
+          width="15"
+          height="36"
+          viewBox="-1 -5 10 36"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1.55588 24.1113L12.667 13.0002L1.55588 1.88911"
+            stroke="#072C52"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+
+      <div class="swiper-button-prev catalog-button-prev">
+        <svg
+          width="15"
+          height="36"
+          viewBox="-1 -5 22 36"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M13.4441 24.1113L2.33301 13.0002L13.4441 1.88911"
+            stroke="#072C52"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <script>
+      let catalogSwiper = new Swiper(".catalog-swiper", {
+        slidesPerView: "auto",
+        spaceBetween: 19,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+
+      const clickFirstMenuItem = (selector) => {
+        document.querySelector(selector).click();
+      };
+
+      const activeMenuItemColor = (item) => {
+        document.querySelectorAll(".catalog-menu__item").forEach((el) => {
+          if (
+            el.parentNode.parentElement.getAttribute("data") ===
+            item.parentNode.parentElement.getAttribute("data")
+          ) {
+            el.querySelector("div").style.color = "";
+          }
+        });
+
+        item.querySelector("div").style.color = "#072C52";
+      };
+
+      async function fetchData(url) {
+        try {
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const data = await response.json();
+          return data;
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          return null;
+        }
+      }
+
+      async function processData(filter) {
+        const url = `https://store.tildacdn.com/api/getproductslist/?storepartuid=147756842611&recid=702692096&c=1707812304903&getparts=true&getoptions=true&filters%5Bstorepartuid%5D%5B0%5D=${filter}&size=36`;
+        const data = await fetchData(url);
+        console.log(data);
+        if (data) {
+          return data;
+        }
+      }
+
+      const setDataCatalog = (dataItems, dataDescription, menuItem) => {
+        const result = {};
+        const catalogType = dataDescription.products.filter(
+          (item) => item.title === menuItem
+        )[0].sku;
+        const description = dataDescription.products.filter(
+          (item) => item.title === menuItem
+        )[0].descr;
+        result[catalogType] = [
+          {
+            label: menuItem,
+            description: description,
+            slides: [],
+          },
+        ];
+
+        dataItems.products.forEach((item) => {
+          result[catalogType][0].slides.push({
+            label: item.title,
+            description: item.descr,
+            img: JSON.parse(item.gallery).map((obj) => obj.img),
+          });
+        });
+
+        return result;
+      };
+
+      $(document).ready(function () {
+        const descriptionFilter = "ОПИСАНИЕ РАЗДЕЛОВ";
+        const menuItems = document.querySelectorAll(".catalog-menu__item");
+        const officeSlider = document.querySelector('[data-slider="office"]');
+        const souvenirSlider = document.querySelector(
+          '[data-slider="souvenirs"]'
+        );
+
+        const handleMenuClick = async () => {
+          menuItems.forEach(async (item, index) => {
+            const itemLabel = item.addEventListener("click", async () => {
+              const dataItems = await processData(item.textContent.trim());
+              const dataDescription = await processData(descriptionFilter);
+              const catalog = setDataCatalog(
+                dataItems,
+                dataDescription,
+                item.textContent.trim()
+              );
+
+              activeMenuItemColor(item);
+              const dataAttribute =
+                item.parentNode.parentElement.getAttribute("data");
+              let slider =
+                dataAttribute === "souvenirs" ? souvenirSlider : officeSlider;
+              const selectedItem = catalog[dataAttribute].find(
+                (catalogItem) =>
+                  catalogItem.label.toUpperCase() === item.innerText
+              );
+
+              if (selectedItem) {
+                const { label, description, slides } = selectedItem;
+                const sliderLabel = slider.querySelector(".catalog-label");
+                const sliderDescription = slider.querySelector(
+                  ".catalog-description"
+                );
+                sliderLabel.innerHTML = label;
+                sliderDescription.innerHTML = description;
+
+                const swiperWrapper = slider.querySelector(".swiper-wrapper");
+                const swiperButtonNext = swiperWrapper.nextElementSibling;
+                const swiperButtonPrev =
+                  swiperWrapper.nextElementSibling.nextElementSibling;
+
+                swiperButtonNext.style.top =
+                  sliderLabel.nextElementSibling.offsetHeight - 25 + 235 + "px";
+                swiperButtonPrev.style.top =
+                  sliderLabel.nextElementSibling.offsetHeight - 25 + 235 + "px";
+
+                swiperWrapper.innerHTML = "";
+
+                slides.forEach((slide, index) => {
+                  const catalogItem = document.createElement("div");
+                  catalogItem.classList.add("swiper-slide", "catalog-item");
+
+                  const img = document.createElement("img");
+                  img.src = slide.img[0];
+
+                  catalogItem.append(img);
+
+                  swiperWrapper.append(catalogItem);
+
+                  catalogItem.addEventListener("click", () => {
+                    document
+                      .querySelector('a[href="#popup:embedcode"]')
+                      .click();
+                    showImgSlider(item, dataAttribute, selectedItem, index);
+                  });
+                });
+              }
+            });
+          });
+        };
+
+        const showImgSlider = (item, dataAttribute, selectedItem, index) => {
+          let slider =
+            dataAttribute === "souvenirs" ? souvenirSlider : officeSlider;
+          const imgSlider = document.querySelector(".img-swiper");
+
+          if (selectedItem) {
+            const { slides } = selectedItem;
+
+            imgSlider.querySelector(".swiper-wrapper").innerHTML = "";
+
+            slides.forEach((slide, slideIndex) => {
+              if (slideIndex === index) {
+                slide.img.forEach((img) => {
+                  const imgItem = document.createElement("div");
+                  imgItem.classList.add("swiper-slide", "img-catalog-item");
+
+                  const imgSrc = document.createElement("img");
+                  imgSrc.src = img;
+
+                  imgItem.append(imgSrc);
+
+                  imgSlider.querySelector(".swiper-wrapper").append(imgItem);
+                });
+              }
+            });
+          }
+        };
+
+        handleMenuClick(menuItems);
+        clickFirstMenuItem(".pencils-item");
+        clickFirstMenuItem(".puzzles-item");
+      });
+    </script>
+  </body>
+</html>

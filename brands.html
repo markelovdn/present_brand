@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brands</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  </head>
+  <body>
+    <style>
+      .brands-wrapper {
+        width: 95%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 20px 20px 20px 2.5%;
+      }
+
+      .brands-swiper__container {
+        background-image: url("https://static.tildacdn.com/tild6164-3736-4334-a430-626365386662/-237_1.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: left center;
+        background-color: #162d51;
+        width: 1120px;
+        border-radius: 20px;
+        position: relative;
+        height: 100%;
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        overflow: hidden;
+
+        @media screen and (max-width: 1200px) {
+          width: 100%;
+        }
+      }
+
+      .brands-header {
+        font-family: "Raleway", Arial, sans-serif;
+        font-weight: 700;
+        font-size: 64px;
+        color: #fff;
+        align-self: start;
+        padding: 40px 0px 20px 40px;
+      }
+
+      .brand-swiper__top,
+      .brand-swiper__bottom {
+        width: 1095px !important;
+        padding: 10px 15px 35px 15px;
+
+        @media screen and (max-width: 959px) {
+          width: 95% !important;
+        }
+
+        /*@media (min-width: 481px) and (max-width: 959px) {*/
+        /*  width: 96% !important;*/
+        /*}*/
+      }
+
+      .brand-item {
+        width: 265px !important;
+        height: 265px !important;
+        border: 1px solid #fff;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        background-color: #fff;
+
+        @media screen and (max-width: 480px) {
+          width: 150px !important;
+          height: 150px !important;
+        }
+
+        @media (min-width: 481px) and (max-width: 959px) {
+          width: 167px !important;
+          height: 167px !important;
+        }
+      }
+
+      .brand-item img {
+        height: 202px;
+        width: 90%;
+        object-fit: contain;
+      }
+    </style>
+
+    <div class="brands-wrapper">
+      <div class="brands-swiper__container">
+        <div class="brands-header">Наши клиенты</div>
+        <div class="swiper brand-swiper__top">
+          <div class="swiper-wrapper brand-items__top">
+            <div class="swiper-slide brand-item">
+              <img
+                src="https://static.tildacdn.com/tild3762-3739-4761-a634-353736396462/___12022024_07_02_18.png"
+              />
+            </div>
+
+            <div class="swiper-slide brand-item">
+              <img
+                src="https://static.tildacdn.com/tild3531-6639-4338-a563-333864653031/image.png"
+              />
+            </div>
+
+            <div class="swiper-slide brand-item">
+              <img
+                src="https://static.tildacdn.com/tild3965-6162-4136-b365-313731613930/image.png"
+              />
+            </div>
+
+            <div class="swiper-slide brand-item">
+              <img
+                src="https://static.tildacdn.com/tild3434-3635-4539-b461-623162613031/image.png"
+              />
+            </div>
+
+            <div class="swiper-slide brand-item">
+              <img
+                src="https://static.tildacdn.com/tild3439-6261-4262-b735-383134353366/image.png"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper brand-swiper__bottom">
+          <div class="swiper-wrapper brand-items__bottom">
+            <div class="swiper-slide brand-item">
+              <img
+                src="https://static.tildacdn.com/tild6535-3031-4533-a535-363430306533/image.png"
+              />
+            </div>
+
+            <div class="swiper-slide brand-item">
+              <img
+                src="https://static.tildacdn.com/tild3534-6633-4465-b034-333539386561/image.png"
+              />
+            </div>
+
+            <div class="swiper-slide brand-item">
+              <img
+                src="https://static.tildacdn.com/tild3566-6463-4561-a164-383936633436/image.png"
+              />
+            </div>
+
+            <div class="swiper-slide brand-item">
+              <img
+                src="https://static.tildacdn.com/tild3965-3761-4339-a131-356663623464/image.png"
+              />
+            </div>
+
+            <div class="swiper-slide brand-item">
+              <img
+                src="https://static.tildacdn.com/tild3964-3531-4438-b735-343230613236/image.png"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      //Код слайдера брэндов
+      document.addEventListener("DOMContentLoaded", function () {
+        let topBrandsSwiper = new Swiper(".brand-swiper__top", {
+          slidesPerView: "auto",
+          spaceBetween: 20,
+          speed: 5000,
+          autoplay: {
+            delay: 0,
+            reverseDirection: true,
+            disableOnInteraction: true,
+          },
+        });
+
+        topBrandsSwiper.on("slideChange", function () {
+          if (!topBrandsSwiper.autoplay.running) {
+            topBrandsSwiper.autoplay.start();
+          }
+        });
+
+        let bottomBrandsSwiper = new Swiper(".brand-swiper__bottom", {
+          slidesPerView: "auto",
+          spaceBetween: 20,
+          speed: 3000,
+          autoplay: {
+            delay: 0,
+            reverseDirection: false,
+            disableOnInteraction: true,
+          },
+        });
+
+        bottomBrandsSwiper.on("slideChange", function () {
+          if (!bottomBrandsSwiper.autoplay.running) {
+            bottomBrandsSwiper.autoplay.start();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
